@@ -42,3 +42,9 @@ server/public/uploads/*
 !server/data/.gitkeep
 !server/public/uploads/.gitkeep
 
+# Keep logo directory and images
+!ming/
+!ming/*.png
+!images/
+!images/*.png
+
