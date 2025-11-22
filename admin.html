@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - متجر الواحة</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="ming/007D6B10-28FF-4212-A5C5-E0B2E3A46442.png" alt="شعار متجر الواحة" class="logo-image">
+                <span class="logo-text">متجر الواحة</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="store.html">المتجر</a>
+                <a href="admin.html">لوحة التحكم</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel">
+        <div class="container">
+            <h1 class="admin-title">لوحة التحكم</h1>
+            
+            <div class="admin-tabs">
+                <button class="tab-btn active" data-tab="products">المنتجات</button>
+                <button class="tab-btn" data-tab="categories">الفئات</button>
+                <button class="tab-btn" data-tab="store-settings">تعديل المتجر</button>
+            </div>
+
+            <!-- Products Tab -->
+            <div class="admin-section" id="productsSection">
+                <div class="section-header">
+                    <h2>إدارة المنتجات</h2>
+                    <button class="btn btn-primary" id="addProductBtn">إضافة منتج جديد</button>
+                </div>
+                <div class="products-grid" id="productsGrid">
+                    <div class="loading">جاري التحميل...</div>
+                </div>
+            </div>
+
+            <!-- Categories Tab -->
+            <div class="admin-section hidden" id="categoriesSection">
+                <div class="section-header">
+                    <h2>إدارة الفئات</h2>
+                    <button class="btn btn-primary" id="addCategoryBtn">إضافة فئة جديدة</button>
+                </div>
+                <div class="categories-list" id="categoriesList">
+                    <div class="loading">جاري التحميل...</div>
+                </div>
+            </div>
+
+            <!-- Store Settings Tab -->
+            <div class="admin-section hidden" id="storeSettingsSection">
+                <div class="section-header">
+                    <h2>تعديل المتجر</h2>
+                </div>
+                <form id="storeSettingsForm" class="store-settings-form">
+                    <div class="form-group">
+                        <label>حساب إنستغرام</label>
+                        <input type="text" id="storeInstagram" placeholder="مثال: @yourstore">
+                    </div>
+                    <div class="form-group">
+                        <label>حساب فيسبوك</label>
+                        <input type="text" id="storeFacebook" placeholder="مثال: https://facebook.com/yourstore">
+                    </div>
+                    <div class="form-group">
+                        <label>رقم التواصل</label>
+                        <input type="text" id="storePhone" placeholder="مثال: +966501234567">
+                    </div>
+                    <div class="form-group">
+                        <label>واتساب</label>
+                        <input type="text" id="storeWhatsapp" placeholder="مثال: +966501234567">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">حفظ الإعدادات</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Modal -->
+    <div class="modal-overlay" id="passwordModal">
+        <div class="modal-content password-modal">
+            <div class="modal-header">
+                <h2>تسجيل الدخول</h2>
+            </div>
+            <form id="passwordForm" class="password-form">
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="passwordInput" required autofocus>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">دخول</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal-overlay hidden" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">إضافة منتج جديد</h2>
+                <button class="close-btn" id="closeModal">×</button>
+            </div>
+            <form id="productForm" class="product-form">
+                <input type="hidden" id="productId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>اسم المنتج (عربي) *</label>
+                        <input type="text" id="productName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>اسم المنتج (إنجليزي)</label>
+                        <input type="text" id="productNameEn">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>الوصف (عربي)</label>
+                    <textarea id="productDescription" rows="4"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>السعر (د.ع) *</label>
+                        <input type="number" id="productPrice" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>الفئة *</label>
+                        <select id="productCategory" required></select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>المخزون</label>
+                        <input type="number" id="productStock" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>الأبعاد</label>
+                        <input type="text" id="productDimensions" placeholder="مثال: 30x20x15 سم">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>المادة</label>
+                        <input type="text" id="productMaterial" placeholder="مثال: فخار، نحاس">
+                    </div>
+                    <div class="form-group">
+                        <label>المنشأ</label>
+                        <input type="text" id="productOrigin" placeholder="مثال: مصر، العراق">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>العصر/الفترة</label>
+                    <input type="text" id="productEra" placeholder="مثال: العصر الإسلامي">
+                </div>
+                <div class="form-group">
+                    <label>الصور</label>
+                    <input type="file" id="productImages" multiple accept="image/*">
+                    <div id="imagePreview" class="image-preview-container"></div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="cancelBtn">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">حفظ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Category Modal -->
+    <div class="modal-overlay hidden" id="categoryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="categoryModalTitle">إضافة فئة جديدة</h2>
+                <button class="close-btn" id="closeCategoryModal">×</button>
+            </div>
+            <form id="categoryForm" class="category-form">
+                <input type="hidden" id="categoryId">
+                <div class="form-group">
+                    <label>اسم الفئة (عربي) *</label>
+                    <input type="text" id="categoryName" required>
+                </div>
+                <div class="form-group">
+                    <label>اسم الفئة (إنجليزي)</label>
+                    <input type="text" id="categoryNameEn">
+                </div>
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <textarea id="categoryDescription" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="cancelCategoryBtn">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">حفظ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
+

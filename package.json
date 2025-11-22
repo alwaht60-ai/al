@@ -1,0 +1,20 @@
+{
+  "name": "antique-oasis-store",
+  "version": "1.0.0",
+  "description": "متجر إلكتروني للقطع الأثرية المائية وقطع الواحة",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && node index.js",
+    "client": "cd client && cross-env PORT=4000 npm start",
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install"
+  },
+  "keywords": ["ecommerce", "antique", "oasis"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3"
+  }
+}
+
